@@ -2,8 +2,10 @@ package com.synisys;
 
 public class TestBean {
     private String name;
-    public TestBean(String name) {
+    private int age;
+    public TestBean(String name, int age) {
         this.name = name;
+        this.age = age;
     }
 
     public String getName() {

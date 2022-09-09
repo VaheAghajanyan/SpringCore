@@ -9,10 +9,8 @@
     <context:property-placeholder location="classpath:musicPlayer.properties"></context:property-placeholder>
 
     <bean id="testBean"
-          class="com.synisys.TestBean"
-    >
+          class="com.synisys.TestBean">
         <constructor-arg value="Vahe"/>
-        <constructor-arg value="22"/>
     </bean>
 
     <bean id="musicPlayer"
