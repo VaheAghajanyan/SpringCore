@@ -7,16 +7,11 @@ public class TestSpring {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
                 "applicationContext.xml");
 
-        /*TestBean testBean = applicationContext.getBean("testBean", TestBean.class);
-        System.out.println(testBean.getName());
-        applicationContext.close();*/
+        MusicPlayer musicPlayer = applicationContext.getBean("musicPlayer", MusicPlayer.class);
+        musicPlayer.playMusic(MusicType.CLASSICAL);
+        System.out.println(musicPlayer.getVolume());
+        System.out.println(musicPlayer.getName());
 
-        Music classicalMusic = applicationContext.getBean("classicalMusic", Music.class);
-        MusicPlayer musicPlayer = new MusicPlayer(classicalMusic); // First way - manual
-        MusicPlayer musicPlayer1 = applicationContext.getBean("musicPlayer", MusicPlayer.class); // Second way - Using Dependency Injection
-        MusicPlayer musicPlayer2 = applicationContext.getBean("musicPlayerWithSetter", MusicPlayer.class);
-        musicPlayer.playMusic();
-        musicPlayer1.playMusic();
-        musicPlayer2.playMusic();
+        applicationContext.close();
     }
 }

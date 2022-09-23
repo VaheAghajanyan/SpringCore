@@ -7,36 +7,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
     <context:property-placeholder location="classpath:musicPlayer.properties"></context:property-placeholder>
-
-    <bean id="testBean"
-          class="com.synisys.TestBean"
-    >
-        <constructor-arg value="Vahe"/>
-        <constructor-arg value="22"/>
-    </bean>
-
-    <bean id="musicPlayer"
-    class="com.synisys.MusicPlayer">
-    <constructor-arg ref="classicalMusic"></constructor-arg>
-    </bean>
-
-    <bean id="musicPlayerWithSetter"
-    class="com.synisys.MusicPlayer">
-        <property name="music" ref="classicalMusic"></property>
-        <property name="text" value="${musicPlayer.text}"></property>
-        <property name="musicList">
-            <list>
-                <ref bean="classicalMusic"></ref>
-                <ref bean="rockMusic"></ref>
-            </list>
-        </property>
-    </bean>
-
-    <bean id="classicalMusic"
-          class="com.synisys.ClassicalMusic">
-    </bean>
-    <bean id="rockMusic"
-          class="com.synisys.RockMusic">
-    </bean>
+    <context:component-scan base-package="com.synisys"></context:component-scan>
 
 </beans>

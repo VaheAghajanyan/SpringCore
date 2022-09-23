@@ -1,36 +1,43 @@
 package com.synisys;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+@Component
 public class MusicPlayer {
-    private Music music;
-    private List<Music> musicList = new ArrayList<>();
-    private String text;
+    @Value("${musicPlayer.name}")
+    private String name;
+    @Value("${musicPlayer.volume}")
+    private String volume;
+    private Music classicalMusic;
+    private Music rockMusic;
 
-    public MusicPlayer(Music music) {
-        this.music = music;
+    @Autowired
+    public MusicPlayer(@Qualifier("classicalMusic") ClassicalMusic music1,
+                       @Qualifier("rockMusic") RockMusic music2) {
+        this.classicalMusic = music1;
+        this.rockMusic = music2;
     }
 
-    public MusicPlayer(){
-
-    };
-
-    public void setMusic(Music music) {
-        this.music = music;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setMusicList(List<Music> list) {
-        this.musicList = list;
-    }
-
-    public void playMusic() {
-        for (Music music : musicList) {
-            System.out.println(music.getSong());
+    public void playMusic(MusicType musicType) {
+        switch (musicType) {
+            case CLASSICAL:
+                classicalMusic.getSong().forEach(System.out::println);
+                break;
+            case ROCK:
+                rockMusic.getSong().forEach(System.out::println);
+                break;
+            default:
+                System.out.println("Wrong music type.");
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVolume() {
+        return volume;
     }
 }
